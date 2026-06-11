@@ -6,35 +6,222 @@
 <title>FLUTO KEY SYSTEM</title>
 
 <style>
-body{
+*{
     margin:0;
-    height:100vh;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#050510;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#050510;
-    font-family:Arial, sans-serif;
 }
 
 .box{
-    width:360px;
-    padding:25px;
+    width:380px;
+    padding:30px;
     border-radius:20px;
     background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(10px);
-    box-shadow:0 0 30px #6f00ff;
-    text-align:center;
+    backdrop-filter:blur(12px);
+    box-shadow:0 0 25px rgba(138,43,226,.6);
 }
 
 .logo{
-    font-size:42px;
+    text-align:center;
+    font-size:45px;
     font-weight:bold;
-    margin-bottom:30px;
-    animation:rgbGlow 3s infinite;
+    margin-bottom:35px;
+    animation:rgbText 3s infinite;
 }
 
 .task{
     display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:18px 0;
+    color:white;
+    font-size:20px;
+}
+
+.timer{
+    width:80px;
+    height:42px;
+    border:none;
+    border-radius:12px;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    animation:rgbButton 3s infinite;
+}
+
+.timer:disabled{
+    opacity:1;
+}
+
+#getKey{
+    display:none;
+    width:100%;
+    margin-top:25px;
+    height:50px;
+    border:none;
+    border-radius:14px;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+    animation:rgbButton 3s infinite;
+}
+
+@keyframes rgbText{
+    0%{
+        color:#8a2be2;
+        text-shadow:0 0 15px #8a2be2;
+    }
+    33%{
+        color:#2196f3;
+        text-shadow:0 0 15px #2196f3;
+    }
+    66%{
+        color:#ff0033;
+        text-shadow:0 0 15px #ff0033;
+    }
+    100%{
+        color:#8a2be2;
+        text-shadow:0 0 15px #8a2be2;
+    }
+}
+
+@keyframes rgbButton{
+    0%{
+        background:#8a2be2;
+        box-shadow:0 0 15px #8a2be2;
+    }
+    33%{
+        background:#2196f3;
+        box-shadow:0 0 15px #2196f3;
+    }
+    66%{
+        background:#ff0033;
+        box-shadow:0 0 15px #ff0033;
+    }
+    100%{
+        background:#8a2be2;
+        box-shadow:0 0 15px #8a2be2;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <div class="logo">FLUTO</div>
+
+    <div class="task">
+        <span>Join Channel</span>
+        <button id="joinBtn" class="timer">25</button>
+    </div>
+
+    <div class="task">
+        <span>Follow TikTok</span>
+        <button id="tiktokBtn" class="timer">15</button>
+    </div>
+
+    <button id="getKey">GET KEY</button>
+
+</div>
+
+<script>
+
+let joinTime = 25;
+let tiktokTime = 15;
+
+let joinDone = false;
+let tiktokDone = false;
+
+const joinBtn = document.getElementById("joinBtn");
+const tiktokBtn = document.getElementById("tiktokBtn");
+const getKey = document.getElementById("getKey");
+
+joinBtn.onclick = function(){
+
+    if(joinDone) return;
+
+    window.open(
+    "https://whatsapp.com/channel/0029Vb7BMKU6mYPSsNzTWs45",
+    "_blank"
+    );
+
+    joinBtn.disabled = true;
+
+    let countdown = setInterval(() => {
+
+        joinTime--;
+        joinBtn.innerText = joinTime;
+
+        if(joinTime <= 0){
+            clearInterval(countdown);
+            joinBtn.innerText = "✓";
+            joinDone = true;
+            checkDone();
+        }
+
+    },1000);
+};
+
+tiktokBtn.onclick = function(){
+
+    if(tiktokDone) return;
+
+    window.open(
+    "https://www.tiktok.com/@anzyonly",
+    "_blank"
+    );
+
+    tiktokBtn.disabled = true;
+
+    let countdown = setInterval(() => {
+
+        tiktokTime--;
+        tiktokBtn.innerText = tiktokTime;
+
+        if(tiktokTime <= 0){
+            clearInterval(countdown);
+            tiktokBtn.innerText = "✓";
+            tiktokDone = true;
+            checkDone();
+        }
+
+    },1000);
+};
+
+function checkDone(){
+
+    if(joinDone && tiktokDone){
+        getKey.style.display = "block";
+    }
+
+}
+
+getKey.onclick = function(){
+
+    window.open(
+    "https://pastebin.com/KCRbyyee",
+    "_blank"
+    );
+
+};
+
+</script>
+
+</body>
+</html>    display:flex;
     justify-content:space-between;
     align-items:center;
     margin:18px 0;
